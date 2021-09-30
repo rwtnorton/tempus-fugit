@@ -21,10 +21,9 @@ func init() {
 	var err error
 
 	now = time.Now().Local()
-	defaultToDateString := now.Format(dateLayout)
 
 	flag.StringVar(&fromDateString, "from", "1970-01-01", "the from input date")
-	flag.StringVar(&toDateString, "to", defaultToDateString, "the to input date")
+	flag.StringVar(&toDateString, "to", "now", "the to input date")
 	flag.Parse()
 
 	fromDate, err = time.ParseInLocation(dateLayout, fromDateString, time.Local)
@@ -32,10 +31,14 @@ func init() {
 		fmt.Fprintf(os.Stderr, "fromDate: %v\n", err)
 		os.Exit(1)
 	}
-	toDate, err = time.ParseInLocation(dateLayout, toDateString, time.Local)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "toDate: %v\n", err)
-		os.Exit(1)
+	if toDateString == "now" {
+		toDate = now
+	} else {
+		toDate, err = time.ParseInLocation(dateLayout, toDateString, time.Local)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "toDate: %v\n", err)
+			os.Exit(1)
+		}
 	}
 }
 

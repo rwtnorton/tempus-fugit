@@ -27,7 +27,7 @@ from: 2000-01-01 00:00:00 -0800 PST
 ```
 
 Default `--from` date is 1970-01-01.
-Default `--to` date is today.
+Default `--to` date is now.
 
 ```bash
 $ tempus-fugit --help
@@ -35,5 +35,5 @@ Usage of tempus-fugit:
   -from string
         the from input date (default "1970-01-01")
   -to string
-        the to input date (default "2021-09-30") [today]
+        the to input date (default "now")
 ```
